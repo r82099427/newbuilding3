@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<link rel="stylesheet" href="dist/style/index.min.css" />
+		<link rel="stylesheet" href=" https://cdn.jsdelivr.net/npm/chiron-sung-hk-webfont@1.0.7/css/vf.min.css" />
+	</head>
+	<body>
+		<div id="app">
+			<div id="left">
+				<div class="bar">
+					<div class="tri-up"></div>
+					<div class="indicator" :style="{height: (activeIndex + 1) / list.length * 100 + '%'}"></div>
+					<div class="tri-down"></div>
+				</div>
+			</div>
+			<div id="middle">
+				<div class="subtitle" :class="{animation: animation}">{{subtitle}}</div>
+				<div class="text">
+					<div class="sketch">
+						<img :src="'img/sketch/' + sub.sketch" v-for="(sub, s) in list" ref="sketchs" />
+					</div>
+					<div class="year" ref="title-year">
+						<span class="number">2</span>
+						<span class="number">0</span>
+						<span class="number">2</span>
+						<span class="number">3</span>
+					</div>
+					<div class="title" :class="{animation: animation}">{{title}}</div>
+					<div class="company" :class="{animation: animation}">YONG LONG</div>
+				</div>
+				<div class="images">
+					<div class="bar" :class="{animation: animation}"></div>
+					<img v-for="subject in list" :src="'img/img/' + subject.img" ref="images" />
+					<div class="bar" :class="{animation: animation}"></div>
+				</div>
+				<div class="learn-more">
+					<div class="more" :class="{animation: animation}">
+						<div class="en">LEARN MORE</div>
+						<div class="ch">了解更多</div>
+					</div>
+					<div class="bar"></div>
+				</div>
+			</div>
+			<div id="right">
+				<div class="bar"></div>
+				<div class="scrollbar" :style="{top: scrollTop + 'px'}">
+					<div class="subject" v-for="(sub, s) in list" :class="{active: s == activeIndex}" @click="setItem(s)">
+						<div class="sketch">
+							<img :src="'img/sketch/' + sub.sketch" />
+						</div>
+						<div class="square"></div>
+					</div>
+				</div>
+				<div class="bar-title">
+					<div class="year" ref="bar-title-year">
+						<span class="number">2</span>
+						<span class="number">0</span>
+						<span class="number">2</span>
+						<span class="number">3</span>
+					</div>
+					<div class="subtitle" :class="{animation: animation}">{{subtitle}}</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/index.js"></script>
+</html>

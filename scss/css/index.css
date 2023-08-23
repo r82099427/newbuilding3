@@ -1,0 +1,570 @@
+@charset "UTF-8";
+body {
+  font-family: "Chiron Sung HK WS"; /* 留意字體名稱 */
+  font-weight: 250; /* 250 至 900 之間的任一數值 */
+  font-style: normal; /* normal （正體）或 italic（斜體） */
+  font-variation-settings: "PADG" 4; /* 0 至 10 之間的任一數值 */
+}
+
+html {
+  height: 100vh;
+}
+
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-size: cover;
+}
+
+#app {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+#left {
+  flex: 0 0 25%;
+  position: relative;
+}
+@media (min-width: 576px) {
+  #left {
+    flex: 0 0 20%;
+  }
+}
+#left .bar {
+  position: absolute;
+  width: 3px;
+  height: 50%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-left: 1px solid #fff;
+  margin: auto;
+}
+#left .indicator {
+  background-color: #fff;
+  width: 100%;
+  transition: height 0.75s;
+}
+#left .tri-up {
+  top: -8px;
+  width: 0;
+  height: 0;
+  border-left: 3.464px solid transparent;
+  border-right: 3.464px solid transparent;
+  border-bottom: 4px solid #fff;
+}
+#left .tri-down {
+  bottom: -8px;
+  width: 0;
+  height: 0;
+  border-left: 3.464px solid transparent;
+  border-right: 3.464px solid transparent;
+  border-top: 4px solid #fff;
+}
+#left .tri-up,
+#left .tri-down {
+  position: absolute;
+  left: -2px;
+}
+
+#middle {
+  flex: 0 0 50%;
+  position: relative;
+}
+@media (min-width: 576px) {
+  #middle {
+    flex: 0 0 60%;
+  }
+}
+#middle .subtitle {
+  display: block;
+  position: absolute;
+  top: 19%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: 0.25rem;
+  color: #fff;
+}
+@media (min-width: 576px) {
+  #middle .subtitle {
+    display: none;
+  }
+}
+#middle .subtitle.animation {
+  animation: flip-x 0.75s;
+}
+#middle .images {
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: 0;
+  right: 0;
+}
+#middle .images img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0;
+}
+@media (min-width: 576px) {
+  #middle .images img.current {
+    opacity: 1;
+    animation: slide-in 0.75s forwards;
+  }
+  #middle .images img.previous {
+    z-index: 1;
+    animation: slide-out 0.75s forwards;
+  }
+}
+@media (max-width: 576px) {
+  #middle .images .current.up {
+    animation: slide-up-in 0.75s forwards;
+  }
+  #middle .images .current.down {
+    animation: slide-down-in 0.75s forwards;
+  }
+  #middle .images .previous.up {
+    animation: slide-up-out 0.75s forwards;
+  }
+  #middle .images .previous.down {
+    animation: slide-down-out 0.75s forwards;
+  }
+  #middle .images .top {
+    transition: opacity 0.75s;
+    opacity: 0.5;
+    transform: scale(0.8) translateY(-150%);
+  }
+  #middle .images .bottom {
+    transition: opacity 0.75s;
+    opacity: 0.5;
+    transform: scale(0.8) translateY(150%);
+  }
+  #middle .images img:not(.top):not(.bottom):not(.current) {
+    opacity: 0;
+  }
+  #middle .images .current {
+    opacity: 1;
+    transform: scale(1) translateY(0%);
+  }
+}
+#middle .images .bar {
+  display: block;
+  border-top: 1px solid #806b5b;
+  border-bottom: 2px solid #806b5b;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+@media (min-width: 576px) {
+  #middle .images .bar {
+    display: none;
+  }
+}
+#middle .images .bar.animation {
+  animation: flip-y 0.75s;
+}
+#middle .images .bar:first-child {
+  top: -8px;
+}
+#middle .images .bar:last-child {
+  bottom: -8px;
+}
+#middle .text {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+#middle .text .sketch {
+  width: 100%;
+  height: 10%;
+  position: relative;
+  display: block;
+}
+#middle .text .sketch img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 80%;
+  opacity: 0;
+}
+#middle .text .sketch img.current {
+  opacity: 1;
+  animation: opacity-in 0.75s forwards;
+}
+#middle .text .sketch img.previous {
+  opacity: 0;
+  animation: opacity-in 0.75s backwards;
+}
+@media (min-width: 576px) {
+  #middle .text .sketch {
+    display: none;
+  }
+}
+#middle .text .year {
+  font-size: 2rem;
+  letter-spacing: 0.25rem;
+  text-align: center;
+  font-weight: bold;
+}
+@media (min-width: 576px) {
+  #middle .text .year {
+    font-size: 4rem;
+  }
+}
+#middle .text .year .number {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  opacity: 0;
+  animation: fade-in 0.75s forwards;
+}
+#middle .text .year .number span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  animation: fade-out 0.75s forwards;
+}
+#middle .text .title {
+  font-weight: bold;
+  text-align: center;
+  font-size: 1rem;
+  letter-spacing: 0.25rem;
+}
+@media (min-width: 576px) {
+  #middle .text .title {
+    font-size: 4rem;
+  }
+}
+#middle .text .title.animation {
+  animation: flip-y 0.75s;
+}
+#middle .text .company {
+  display: none;
+  font-size: 1.25rem;
+}
+@media (min-width: 576px) {
+  #middle .text .company {
+    display: block;
+  }
+}
+#middle .text .company.animation {
+  animation: flip-y 0.75s;
+  animation-delay: 0.1875s;
+}
+#middle .learn-more {
+  position: absolute;
+  top: 60%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+@media (min-width: 576px) {
+  #middle .learn-more {
+    top: 75%;
+  }
+}
+#middle .learn-more .more {
+  text-align: center;
+}
+#middle .learn-more .more.animation {
+  animation: flip-x 0.75s;
+}
+#middle .learn-more .en {
+  font-weight: bold;
+}
+#middle .learn-more .bar {
+  border-bottom: 2px solid #806b5b;
+  margin-top: 0.25rem;
+  width: 10rem;
+  display: none;
+}
+@media (min-width: 576px) {
+  #middle .learn-more .bar {
+    display: block;
+  }
+}
+
+#right {
+  flex: 0 0 25%;
+  position: relative;
+}
+@media (min-width: 576px) {
+  #right {
+    flex: 0 0 3;
+  }
+}
+@media (min-width: 576px) {
+  #right {
+    flex: 0 0 20%;
+  }
+}
+#right > * {
+  display: none;
+}
+@media (min-width: 576px) {
+  #right > * {
+    display: block;
+  }
+}
+#right .scrollbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+  transition: top 0.75s;
+}
+#right .bar {
+  overflow-y: hidden;
+  border: 1px solid #806b5b;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  margin: auto;
+}
+#right .subject {
+  position: relative;
+  overflow: visible;
+  width: 100%;
+  height: 33.3333333333%;
+  cursor: pointer;
+}
+#right .subject.active .sketch {
+  left: 0%;
+  right: 0%;
+}
+#right .subject.active .square {
+  width: 5rem;
+  height: 5rem;
+}
+#right .subject .sketch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: auto;
+  left: 10%;
+  right: 55%;
+  transition: left 0.75s ease-in-out, right 0.75s ease-in-out;
+  z-index: 2;
+}
+#right .subject .sketch img {
+  width: 100%;
+  transform: scale(1);
+  transition: transform 0.75s;
+}
+#right .subject:hover:not(.active) img {
+  transform: scale(1.25);
+}
+#right .subject .square {
+  box-sizing: border-box;
+  border: 2px solid #806b5b;
+  width: 1rem;
+  height: 1rem;
+  transform: rotate(45deg);
+  background-color: #2c231d;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  z-index: 1;
+  transition: width 0.75s, height 0.75s, transform 0.75s;
+  cursor: pointer;
+}
+#right .bar-title {
+  position: absolute;
+  top: 16.6666666667%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 16.6666666667%;
+  margin: auto;
+  color: #fff;
+  z-index: 3;
+  padding: 6rem 0;
+  box-sizing: border-box;
+}
+#right .bar-title .year {
+  font-size: 2.5rem;
+  letter-spacing: 0.25rem;
+  text-align: center;
+}
+#right .bar-title .year .number {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  opacity: 0;
+  animation: fade-in 0.75s forwards;
+}
+#right .bar-title .year .number span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  animation: fade-out 0.75s forwards;
+}
+#right .bar-title .subtitle {
+  text-align: center;
+  font-size: 1.25rem;
+  letter-spacing: 0.25rem;
+}
+#right .bar-title .subtitle.animation {
+  animation: flip-y 0.75s;
+}
+
+@keyframes flip-y {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+@keyframes flip-x {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+@keyframes opacity-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  from {
+    transform: translateY(3rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-3rem);
+    opacity: 0;
+  }
+}
+@keyframes slide-in {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes slide-out {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateX(0%);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9) translateX(0%);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9) translateX(-20%);
+  }
+}
+@keyframes slide-up-in {
+  0% {
+    transform: scale(0.8) translateY(150%);
+  }
+  50% {
+    transform: scale(0.8) translateY(0%);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes slide-up-out {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0%);
+  }
+  50% {
+    transform: scale(0.8) translateY(-150%);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(0.8) translateY(-150%);
+  }
+}
+@keyframes slide-down-in {
+  0% {
+    transform: scale(0.8) translateY(-150%);
+  }
+  50% {
+    transform: scale(0.8) translateY(0%);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes slide-down-out {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0%);
+  }
+  50% {
+    transform: scale(0.8) translateY(150%);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(0.8) translateY(150%);
+  }
+}/*# sourceMappingURL=index.css.map */
