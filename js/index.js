@@ -57,7 +57,7 @@ let app = Vue.createApp({
 			list: [
 				new Subject(2020, "ROMA V&A5 H", "羅馬VA5", "ROMA V&A5 H 2020.png", "ROMA V&A5 H 2020_sketch.png"),
 				new Subject(2020, "ROMA V&A5 B", "羅馬VA5", "ROMA V&A5 B 2020.png", "ROMA V&A5 B 2020_sketch.png"),
-				new Subject(2018, "BAOREN VA3", "成大保仁VA3", "BAOREN V&A3 2018.jpg", "BAOREN V&A3 2018_sketch.png"),
+				new Subject(2018, "BAOREN VA3", "成大寶仁VA3", "BAOREN V&A3 2018.jpg", "BAOREN V&A3 2018_sketch.png"),
 				//new Subject(2023, "LOMA VA5", "羅馬VA5", "VA5羅馬大圖.jpg", "VA5羅馬.png"),
 				//new Subject(2024, "BAOREN VA3", "成大保仁VA3", "VA5羅馬大圖02.jpg", "VA2.png"),
 				//new Subject(2024, "BAOREN VA3", "成大保仁VA3", "VA5羅馬大圖03.jpg", "VA6成大寶仁.png"),
